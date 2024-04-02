@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kiosk">
+
+	<!-- 사진 등록 -->
+	<insert id="insertImg" parameterType="com.javaex.vo.ImageVo">
+	<![CDATA[
+		insert into images
+		values(#{productNo}, #{orgName}, #{saveName}, #{filePath});
+	]]>
+	</insert>
+
+
+	<!-- 메뉴 등록 -->
+	<insert id="insertMenu" parameterType="com.javaex.vo.ProductVo">
+	<![CDATA[
+	   	insert into product
+		values(null, #{category}, #{name}, #{price})
+	]]>
+	</insert>
+
+	<!-- 리스트 -->
+	<select id="selectList" resultType="com.javaex.vo.ProductVo">
+	<![CDATA[
+		select  no,
+				category,
+				name,
+				price
+		from product
+	]]>
+	</select>
+	
+	<delete id="deleteMenu" parameterType="int">
+	<![CDATA[
+		delete from product
+		where no = #{no}
+	]]>
+	</delete>
+	
+	<delete id="deleteImg" parameterType="int">
+	<![CDATA[
+		delete from images
+		where product_no = #{no}
+	]]>
+	</delete>
+
+</mapper>
